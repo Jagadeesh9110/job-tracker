@@ -67,10 +67,8 @@ const getProgress = (status) => {
 exports.getDashboard = (req, res, next) => {
   const userId = req.user._id;
 
-  // Fetch the user's jobs
   Job.find({ userId: userId })
     .then((jobs) => {
-      // Calculate job summary
       const jobSummary = {
         applied: jobs.filter((job) => job.status === "applied").length,
         interview: jobs.filter((job) => job.status === "interview").length,
@@ -78,7 +76,6 @@ exports.getDashboard = (req, res, next) => {
         rejected: jobs.filter((job) => job.status === "rejected").length,
       };
 
-      // Get upcoming deadlines (jobs with deadlines in the future)
       const deadlines = jobs
         .filter(
           (job) =>
@@ -90,7 +87,6 @@ exports.getDashboard = (req, res, next) => {
           deadline: job.applicationDeadline,
         }));
 
-      // Mock recent activity (you can replace this with actual activity tracking logic)
       const activity = [
         {
           action: "Applied",
@@ -104,17 +100,15 @@ exports.getDashboard = (req, res, next) => {
         },
       ];
 
-      // Add progress to each job
       const jobsWithProgress = jobs.map((job) => ({
         ...job.toObject(),
-        progress: getProgress(job.status), // Calculate progress here
+        progress: getProgress(job.status),
       }));
 
-      // Render the dashboard with the fetched data
       res.render("dashboard", {
         user: req.user,
         jobSummary: jobSummary,
-        jobs: jobsWithProgress, // Pass jobs with progress
+        jobs: jobsWithProgress,
         deadlines: deadlines,
         activity: activity,
         activePage: "dashboard",

@@ -4,13 +4,12 @@
   <body>
     <%- include('./includes/navbar.ejs') %>
     <main class="dashboard-container">
-      <!-- Welcome Message -->
+
       <section class="welcome-section">
         <h1>Welcome, <%= user.userName %>!</h1>
         <p>Track your job applications and stay organized.</p>
       </section>
 
-      <!-- Job Application Summary -->
       <section class="summary-section">
         <h2>Your Job Applications</h2>
         <div class="summary-cards">
@@ -33,7 +32,6 @@
         </div>
       </section>
 
-      <!-- Job Stats Overview -->
       <section class="job-stats">
         <h2>Job Stats Overview</h2>
         <div class="stats-cards">
@@ -52,7 +50,7 @@
         </div>
       </section>
 
-      <!-- Upcoming Deadlines -->
+
       <section class="deadlines-section">
         <h2>Upcoming Deadlines</h2>
         <% if (deadlines.length > 0) { %>
@@ -69,7 +67,6 @@
         <% } %>
       </section>
 
-      <!-- Application Status Progress -->
       <section class="progress-section">
         <h2>Application Progress</h2>
         <div class="progress-bars">
@@ -83,7 +80,7 @@
         </div>
       </section>
 
-      <!-- Job Recommendations (AI-powered) -->
+
       <section class="recommendations-section">
         <h2>AI-powered Job Recommendations</h2>
         <ul>
@@ -93,7 +90,7 @@
         </ul>
       </section>
 
-      <!-- Quick Actions -->
+
       <section class="actions-section">
         <h2>Quick Actions</h2>
         <div class="actions">
@@ -103,7 +100,7 @@
         </div>
       </section>
 
-      <!-- Recent Activity -->
+
       <section class="activity-section">
         <h2>Recent Activity</h2>
         <% if (activity.length > 0) { %>
@@ -120,23 +117,5 @@
         <% } %>
       </section>
     </main>
-    <script>
-      // Example function to get progress based on job status
-      function getProgress(status) {
-        switch(status) {
-          case 'applied':
-            return 20;
-          case 'interview':
-            return 50;
-          case 'offer':
-            return 80;
-          case 'accepted':
-            return 100;
-          case 'rejected':
-            return 0;
-          default:
-            return 0;
-        }
-      }
-    </script>
+   
     <%- include('./includes/footer.ejs') %>
