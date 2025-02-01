@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Job Tracker</title>
+<%- include('./includes/head.ejs') %>
   </head>
   <body>
-    <h1>Job Listings</h1>
+    <main>
+      <%- include('./includes/navbar.ejs') %>
+      <h1>Job Listings</h1>
 
     <% if (jobs.length === 0) { %>
     <p>No jobs available yet. Please check back later.</p>
@@ -21,5 +18,5 @@
       <% }) %>
     </ul>
     <% } %>
-  </body>
-</html>
+    </main>
+<%- include('./includes/footer.ejs') %>

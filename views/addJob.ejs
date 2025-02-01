@@ -1,0 +1,148 @@
+<%- include('./includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/addJob.css" />
+  </head>
+  <body>
+    <%- include('./includes/navbar.ejs') %>
+    <main class="add-job-container">
+      <h1>Add a New Job Application</h1>
+      <form action="/addJob" method="POST" class="job-form" onsubmit="return validateForm()">
+        
+        <!-- Job Title -->
+        <div class="form-group">
+          <label for="jobTitle">Job Title *</label>
+          <input
+            type="text"
+            id="jobTitle"
+            name="title"
+            placeholder="Enter job title (e.g., Software Engineer)"
+            required
+          />
+        </div>
+
+        <!-- Company Name -->
+        <div class="form-group">
+          <label for="company">Company Name *</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            placeholder="Enter company name"
+            required
+          />
+        </div>
+
+        <!-- Job Location -->
+        <div class="form-group">
+          <label for="location">Job Location</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="Enter job location (e.g., Remote, New York, etc.)"
+          />
+        </div>
+
+        <!-- Job Type -->
+        <div class="form-group">
+          <label for="jobType">Job Type *</label>
+          <select id="jobType" name="jobType" required>
+            <option value="" disabled selected>Select job type</option>
+            <option value="full-time">Full-Time</option>
+            <option value="part-time">Part-Time</option>
+            <option value="contract">Contract</option>
+            <option value="internship">Internship</option>
+            <option value="freelance">Freelance</option>
+          </select>
+        </div>
+
+        <!-- Application Status -->
+        <div class="form-group">
+          <label for="status">Application Status *</label>
+          <select id="status" name="status" required>
+            <option value="" disabled selected>Select status</option>
+            <option value="applied">Applied</option>
+            <option value="interview">Interview</option>
+            <option value="offer">Offer</option>
+            <option value="rejected">Rejected</option>
+            <option value="accepted">Accepted</option>
+          </select>
+        </div>
+
+        <!-- Job Description -->
+        <div class="form-group">
+          <label for="description">Job Description</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="5"
+            placeholder="Enter job description or key responsibilities"
+          ></textarea>
+        </div>
+
+        <!-- Application Deadline -->
+        <div class="form-group">
+          <label for="deadline">Application Deadline</label>
+          <input
+            type="date"
+            id="deadline"
+            name="deadline"
+          />
+        </div>
+
+        <!-- Salary Range -->
+        <div class="form-group">
+          <label for="salary">Salary Range</label>
+          <input
+            type="text"
+            id="salary"
+            name="salary"
+            placeholder="Enter salary range (e.g., $60,000 - $80,000)"
+          />
+        </div>
+
+        <!-- Job URL -->
+        <div class="form-group">
+          <label for="jobUrl">Job Posting URL</label>
+          <input
+            type="url"
+            id="jobUrl"
+            name="jobUrl"
+            placeholder="Enter job posting URL"
+          />
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <label for="notes">Notes</label>
+          <textarea
+            id="notes"
+            name="notes"
+            rows="3"
+            placeholder="Add any additional notes or reminders"
+          ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit" class="btn-submit">Add Job</button>
+          <button type="reset" class="btn-reset">Clear Form</button>
+        </div>
+      </form>
+    </main>
+
+    <script>
+      // Form validation function
+      function validateForm() {
+        const jobTitle = document.getElementById('jobTitle').value;
+        const company = document.getElementById('company').value;
+        const jobType = document.getElementById('jobType').value;
+        const status = document.getElementById('status').value;
+
+        if (!jobTitle || !company || !jobType || !status) {
+          alert('Please fill out all required fields.');
+          return false;
+        }
+        return true;
+      }
+    </script>
+    <%- include('./includes/footer.ejs') %>

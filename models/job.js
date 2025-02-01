@@ -38,7 +38,7 @@ const jobSchema = new Schema(
       enum: ["full-time", "part-time", "contract", "internship"],
       default: "full-time",
     },
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

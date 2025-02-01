@@ -1,0 +1,71 @@
+<header class="main-header">
+  <nav class="main-header__nav">
+    <button id="navbar-toggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="main-header__item-list">
+      <li class="main-header__item">
+        <a
+          class="main-header__link"
+          class="<%= activePage === 'home' ? 'active' : '' %>"
+          href="/"
+          >Home</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="main-header__link"
+          class="<%= activePage === 'dashboard' ? 'active' : '' %>"
+          href="/dashboard"
+          >Dashboard</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="main-header__link"
+          class="<%= activePage === 'addJob' ? 'active' : '' %>"
+          href="/addJob"
+          >Add Job</a
+        >
+      </li>
+      <li class="main-header__item">
+        <form action="/search" method="GET" class="main-header__search-form">
+          <input
+            type="text"
+            name="query"
+            class="main-header__search-input"
+            placeholder="Search jobs..."
+          />
+        </form>
+      </li>
+
+      <!-- User Links (Login, Logout, Profile) -->
+      <% if (user) { %>
+      <li class="main-header__item">
+        <a class="main-header__link" href="/profile">Profile</a>
+      </li>
+      <li class="main-header__item">
+        <a class="main-header__link" href="/logout">Logout</a>
+      </li>
+      <% } else { %>
+      <li class="main-header__item">
+        <a class="main-header__link" href="/login">Login</a>
+      </li>
+      <li class="main-header__item">
+        <a class="main-header__link" href="/register">Register</a>
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const navbarToggle = document.getElementById("navbar-toggle");
+  const navbarLinks = document.getElementById("navbar-links");
+
+  navbarToggle.addEventListener("click", () => {
+    navbarLinks.classList.toggle("navbar__links--active");
+  });
+</script>

@@ -1,0 +1,142 @@
+<%- include('./includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+  </head>
+  <body>
+    <%- include('./includes/navbar.ejs') %>
+    <main class="dashboard-container">
+      <!-- Welcome Message -->
+      <section class="welcome-section">
+        <h1>Welcome, <%= user.userName %>!</h1>
+        <p>Track your job applications and stay organized.</p>
+      </section>
+
+      <!-- Job Application Summary -->
+      <section class="summary-section">
+        <h2>Your Job Applications</h2>
+        <div class="summary-cards">
+          <div class="card">
+            <h3>Applied</h3>
+            <p><%= jobSummary.applied || 0 %></p>
+          </div>
+          <div class="card">
+            <h3>Interview</h3>
+            <p><%= jobSummary.interview || 0 %></p>
+          </div>
+          <div class="card">
+            <h3>Offer</h3>
+            <p><%= jobSummary.offer || 0 %></p>
+          </div>
+          <div class="card">
+            <h3>Rejected</h3>
+            <p><%= jobSummary.rejected || 0 %></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Job Stats Overview -->
+      <section class="job-stats">
+        <h2>Job Stats Overview</h2>
+        <div class="stats-cards">
+          <div class="stats-card">
+            <h3>Applications Applied</h3>
+            <p><%= jobs.filter(job => job.status === 'applied').length %></p>
+          </div>
+          <div class="stats-card">
+            <h3>Interviews Scheduled</h3>
+            <p><%= jobs.filter(job => job.status === 'interview').length %></p>
+          </div>
+          <div class="stats-card">
+            <h3>Offers Received</h3>
+            <p><%= jobs.filter(job => job.status === 'offer').length %></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upcoming Deadlines -->
+      <section class="deadlines-section">
+        <h2>Upcoming Deadlines</h2>
+        <% if (deadlines.length > 0) { %>
+          <ul class="deadlines-list">
+            <% deadlines.forEach(deadline => { %>
+              <li>
+                <strong><%= deadline.title %></strong> - <%= deadline.company %>
+                <span class="deadline-date"><%= deadline.deadline.toDateString() %></span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>No upcoming deadlines.</p>
+        <% } %>
+      </section>
+
+      <!-- Application Status Progress -->
+      <section class="progress-section">
+        <h2>Application Progress</h2>
+        <div class="progress-bars">
+          <% jobs.forEach(job => { %>
+            <div class="progress-bar">
+              <h3><%= job.title %> - <%= job.company %></h3>
+              <div class="progress" style="width: <%= job.progress %>%;"></div>
+              <p><%= job.status %></p>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+
+      <!-- Job Recommendations (AI-powered) -->
+      <section class="recommendations-section">
+        <h2>AI-powered Job Recommendations</h2>
+        <ul>
+          <li>Job Recommendation 1 (Based on your previous applications)</li>
+          <li>Job Recommendation 2</li>
+          <li>Job Recommendation 3</li>
+        </ul>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="actions-section">
+        <h2>Quick Actions</h2>
+        <div class="actions">
+          <a href="/jobs/add" class="btn">Add New Job</a>
+          <a href="/search" class="btn">Search Jobs</a>
+          <a href="/templates" class="btn">View Templates</a>
+        </div>
+      </section>
+
+      <!-- Recent Activity -->
+      <section class="activity-section">
+        <h2>Recent Activity</h2>
+        <% if (activity.length > 0) { %>
+          <ul class="activity-list">
+            <% activity.forEach(item => { %>
+              <li>
+                <strong><%= item.action %></strong> - <%= item.details %>
+                <span class="activity-date"><%= item.date.toDateString() %></span>
+              </li>
+            <% }) %>
+          </ul>
+        <% } else { %>
+          <p>No recent activity.</p>
+        <% } %>
+      </section>
+    </main>
+    <script>
+      // Example function to get progress based on job status
+      function getProgress(status) {
+        switch(status) {
+          case 'applied':
+            return 20;
+          case 'interview':
+            return 50;
+          case 'offer':
+            return 80;
+          case 'accepted':
+            return 100;
+          case 'rejected':
+            return 0;
+          default:
+            return 0;
+        }
+      }
+    </script>
+    <%- include('./includes/footer.ejs') %>
